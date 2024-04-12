@@ -3,11 +3,26 @@ from coffeeshop.common.models import BaseModel
 
 
 # Create your models here.
+class Category(BaseModel):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "Category"
+        verbose_name_plural = "Categories"
+
+
 class Image(BaseModel):
     image = models.ImageField()
 
     def __str__(self):
         return self.image.url
+
+    class Meta:
+        verbose_name = "Image"
+        verbose_name_plural = "Images"
 
 
 class Product(BaseModel):
@@ -16,6 +31,11 @@ class Product(BaseModel):
     price = models.FloatField()
     ingredients = models.CharField(max_length=1000)
     images = models.ManyToManyField(Image)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        verbose_name = "Product"
+        verbose_name_plural = "Products"
