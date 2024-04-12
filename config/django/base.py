@@ -160,6 +160,9 @@ CACHES = {
 # Cache time to live is 15 minutes.
 CACHE_TTL = 60 * 15
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 
 APP_DOMAIN = env("APP_DOMAIN", default="http://localhost:8000")
 

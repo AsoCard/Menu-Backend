@@ -15,7 +15,7 @@ class Category(BaseModel):
 
 
 class Image(BaseModel):
-    image = models.ImageField()
+    image = models.ImageField(upload_to='product/images/')
 
     def __str__(self):
         return self.image.url
