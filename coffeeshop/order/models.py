@@ -22,6 +22,9 @@ class Order(BaseModel):
         to=Product
     )
     status = models.CharField(
-        choices=STATUS_CHOICES
+        choices=STATUS_CHOICES, default='1'
     )
     des = models.TextField()
+
+    def __str__(self):
+        return f'{self.user.full_name}-{self.get_status_display()}'
