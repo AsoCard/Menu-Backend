@@ -20,6 +20,7 @@ LOCAL_APPS = [
     'coffeeshop.authentication.apps.AuthenticationConfig',
     'coffeeshop.menu.apps.MenuConfig',
     'coffeeshop.product.apps.ProductConfig',
+    'coffeeshop.order.apps.OrderConfig',
 ]
 
 THIRD_PARTY_APPS = [
