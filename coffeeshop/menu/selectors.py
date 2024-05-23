@@ -1,8 +1,8 @@
 from .models import Menu
 
 
-def get_menu(pk: int = 1) -> Menu | dict:
+def get_menu(name: str = 'Hot') -> Menu | dict:
     try:
-        return Menu.objects.get(pk=pk)
+        return Menu.objects.get(name=name)
     except Menu.DoesNotExist:
         return {}

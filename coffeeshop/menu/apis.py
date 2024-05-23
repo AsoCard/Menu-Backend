@@ -17,5 +17,9 @@ class MenuApi(APIView):
 
     @extend_schema(responses=MenuOutPutSerializer)
     def get(self, request):
-        query = get_menu()
+        filter = request.GET.get('filter', None)
+        if filter:
+            query = get_menu(name=filter)
+        else:
+            query = get_menu()
         return Response(self.MenuOutPutSerializer(query, context={"request": request}).data)
