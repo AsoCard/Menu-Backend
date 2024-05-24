@@ -5,9 +5,8 @@ from rest_framework.views import APIView
 from coffeeshop.menu.models import Menu
 from coffeeshop.menu.selectors import get_menu
 from coffeeshop.product.serializers import ProductsSerializer
+from coffeeshop.product.models import Product
 from rest_framework import generics
-from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import filters
 from django.shortcuts import get_object_or_404
 
 class MenuOutPutSerializer(serializers.ModelSerializer):
