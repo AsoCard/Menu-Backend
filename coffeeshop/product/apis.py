@@ -9,16 +9,6 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
 from rest_framework import generics
 from .serializers import ProductsSerializer
-class ProductApi(APIView):
-    class ProductOutPutSerializer(serializers.ModelSerializer):
-        class Meta:
-            model = Product
-            fields = "__all__"
-
-    @extend_schema(responses=ProductOutPutSerializer)
-    def get(self, request):
-        query = get_products()
-        return Response(self.ProductOutPutSerializer(query, context={"request": request}, many=True).data)
 
 class ProductsSearchApi(generics.ListAPIView):
     queryset = Product.objects.all()
