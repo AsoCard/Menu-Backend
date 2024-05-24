@@ -5,21 +5,23 @@ from rest_framework.views import APIView
 from coffeeshop.menu.models import Menu
 from coffeeshop.menu.selectors import get_menu
 from coffeeshop.product.serializers import ProductsSerializer
+from rest_framework import generics
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import filters
+from django.shortcuts import get_object_or_404
 
+class MenuOutPutSerializer(serializers.ModelSerializer):
+    products = ProductsSerializer(many=True)
 
-class MenuApi(APIView):
-    class MenuOutPutSerializer(serializers.ModelSerializer):
-        products = ProductsSerializer(many=True)
+    class Meta:
+        model = Menu
+        fields = "__all__"
 
-        class Meta:
-            model = Menu
-            fields = "__all__"
-
-    @extend_schema(responses=MenuOutPutSerializer)
-    def get(self, request):
-        filter = request.GET.get('filter', None)
-        if filter:
-            query = get_menu(name=filter)
-        else:
-            query = get_menu()
-        return Response(self.MenuOutPutSerializer(query, context={"request": request}).data)
+class MenuApi(generics.RetrieveAPIView):
+    queryset = Menu.objects.all()
+    serializer_class = MenuOutPutSerializer
+    def get_object(self):
+        name = self.request.GET.get('filter')
+        obj = get_object_or_404(Menu, name=name)
+        self.check_object_permissions(self.request, obj)
+        return obj
