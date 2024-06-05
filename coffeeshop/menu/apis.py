@@ -9,6 +9,7 @@ from coffeeshop.product.models import Product
 from rest_framework import generics
 from django.shortcuts import get_object_or_404
 
+
 class MenuOutPutSerializer(serializers.ModelSerializer):
     products = ProductsSerializer(many=True)
 
@@ -16,9 +17,11 @@ class MenuOutPutSerializer(serializers.ModelSerializer):
         model = Menu
         fields = "__all__"
 
+
 class MenuApi(generics.RetrieveAPIView):
     queryset = Menu.objects.all()
     serializer_class = MenuOutPutSerializer
+
     def get_object(self):
         name = self.request.GET.get('filter')
         obj = get_object_or_404(Menu, name=name)

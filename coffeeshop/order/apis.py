@@ -5,10 +5,11 @@ from rest_framework import status, serializers
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from django.shortcuts import get_object_or_404
 
 from .models import Order
 from .services import create_order
-from .selectors import get_orders
+from .selectors import get_orders, update_order_status
 from ..product.serializers import ProductsSerializer
 from ..users.models import BaseUser
 from ..users.serializers import SmallUserSerializer
@@ -62,3 +63,17 @@ class BartenderOrdersApi(APIView):
         status = request.query_params.get('status')
         query = get_orders(status=status)
         return Response(OrderSerializer(query, context={"request": request}, many=True).data)
+    
+    @extend_schema(responses=OrderSerializer)
+    def put(self, request):
+        order_id = request.query_params.get('id')
+        status = request.PUT.get('status')
+        order = get_object_or_404(Order, id=order_id)
+        query = update_order_status(order=order, status=status)
+        return Response(OrderSerializer({
+            'status': query.status
+        }
+            , context={"request": request}, many=True).data)
+
+    
+    

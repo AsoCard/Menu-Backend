@@ -10,8 +10,16 @@ from rest_framework import filters
 from rest_framework import generics
 from .serializers import ProductsSerializer
 
+
 class ProductsSearchApi(generics.ListAPIView):
     queryset = Product.objects.all()
     filter_backends = [filters.SearchFilter]
+    serializer_class = ProductsSerializer
+    search_fields = ['name', 'detail', 'category__name']
+
+
+class ProductDetailApi(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    queryset = Product.objects.all()
     serializer_class = ProductsSerializer
     search_fields = ['name', 'detail', 'category__name']
