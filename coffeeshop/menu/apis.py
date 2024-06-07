@@ -16,7 +16,7 @@ class MenuOutPutSerializer(serializers.ModelSerializer):
     class Meta:
         model = Menu
         fields = "__all__"
-
+\
 
 class MenuApi(generics.RetrieveAPIView):
     queryset = Menu.objects.all()
