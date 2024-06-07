@@ -39,3 +39,16 @@ class Product(BaseModel):
     class Meta:
         verbose_name = "Product"
         verbose_name_plural = "Products"
+
+
+class Recepie(BaseModel):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True, blank=True)
+    title = models.CharField(max_length=100, null=True, blank=True)
+    ingredients  = models.TextField(null=True, blank=True)
+    steps = models.TextField(null=True, blank=True)
+    img = models.ImageField(upload_to='recepie/', null=True, blank=True)
+    video = models.FileField(null=True, blank=True)
+
+
+    def __str__(self):
+        return self.title

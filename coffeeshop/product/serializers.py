@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from coffeeshop.product.models import Product, Image
+from coffeeshop.product.models import Product, Image, Recepie
 
 
 class ImageSerializer(serializers.ModelSerializer):
@@ -15,4 +15,11 @@ class ProductsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Product
+        fields = "__all__"
+
+
+class RecepiesSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Recepie
         fields = "__all__"
