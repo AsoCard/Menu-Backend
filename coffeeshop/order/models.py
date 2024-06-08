@@ -22,7 +22,7 @@ class Order(BaseModel):
         to=Product
     )
     status = models.CharField(
-        choices=STATUS_CHOICES, default='1'
+        max_length=100,choices=STATUS_CHOICES, default='1'
     )
     des = models.TextField()
 

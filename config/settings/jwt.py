@@ -24,3 +24,8 @@ JWT_AUTH = {
 
     "JWT_AUTH_HEADER_PREFIX": JWT_AUTH_HEADER_PREFIX
 }
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': datetime.timedelta(days=30),
+    'REFRESH_TOKEN_LIFETIME': datetime.timedelta(days=365),
+}

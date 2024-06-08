@@ -67,7 +67,7 @@ class BartenderOrdersApi(APIView):
     @extend_schema(responses=OrderSerializer)
     def put(self, request):
         order_id = request.query_params.get('id')
-        status = request.PUT.get('status')
+        status = request.data.get('status')
         order = get_object_or_404(Order, id=order_id)
         query = update_order_status(order=order, status=status)
         return Response(OrderSerializer({
