@@ -17,9 +17,21 @@ class ProductsSerializer(serializers.ModelSerializer):
         model = Product
         fields = "__all__"
 
+class ProductCreateSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Product
+        fields = "__all__"
+
 
 class RecepiesSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Recepie
+        fields = "__all__"
+
+
+class ImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Image
         fields = "__all__"

@@ -3,12 +3,12 @@ from drf_spectacular.utils import extend_schema
 from rest_framework import serializers, permissions
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from coffeeshop.product.models import Product, Recepie
+from coffeeshop.product.models import Image, Product, Recepie
 from coffeeshop.product.selectors import get_products
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters, status
 from rest_framework import generics
-from .serializers import ProductsSerializer, RecepiesSerializer
+from .serializers import ProductsSerializer, RecepiesSerializer, ImageSerializer, ProductCreateSerializer
 
 
 class ProductsSearchApi(generics.ListAPIView):
@@ -17,6 +17,10 @@ class ProductsSearchApi(generics.ListAPIView):
     serializer_class = ProductsSerializer
     search_fields = ['name', 'detail', 'category__name']
 
+class ProductCreateIMGApi(generics.CreateAPIView):
+    permission_classes = [permissions.AllowAny]
+    queryset = Image.objects.all()
+    serializer_class = ImageSerializer
 
 class ProductDetailApi(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
@@ -24,6 +28,10 @@ class ProductDetailApi(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ProductsSerializer
     search_fields = ['name', 'detail', 'category__name']
 
+class ProductCreateApi(generics.CreateAPIView):
+    permission_classes = [permissions.AllowAny]
+    queryset = Product.objects.all()
+    serializer_class = ProductCreateSerializer
 
 class RecepieDetailApi(APIView):
 

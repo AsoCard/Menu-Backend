@@ -30,7 +30,7 @@ class Product(BaseModel):
     detail = models.CharField(max_length=1000)
     price = models.FloatField()
     ingredients = models.CharField(max_length=1000)
-    images = models.ManyToManyField(Image)
+    images = models.ManyToManyField(Image, null=True, blank=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
 
     def __str__(self):

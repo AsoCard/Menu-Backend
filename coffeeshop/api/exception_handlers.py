@@ -80,7 +80,6 @@ def hacksoft_proposed_exception_handler(exc, ctx):
     else:
         response.data["message"] = response.data["detail"]
         response.data["extra"] = {}
-
-    del response.data["detail"]
+        del response.data["detail"]
 
     return response
