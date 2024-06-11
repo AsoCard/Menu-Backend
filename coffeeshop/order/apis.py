@@ -71,7 +71,7 @@ class BartenderOrdersApi(APIView):
         order = get_object_or_404(Order, id=order_id)
         query = update_order_status(order=order, status=status)
         return Response(OrderSerializer({
-            'status': query.status
+            'status': order.status
         }
             , context={"request": request}, many=True).data)
 

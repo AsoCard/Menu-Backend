@@ -22,6 +22,11 @@ class ProductCreateIMGApi(generics.CreateAPIView):
     queryset = Image.objects.all()
     serializer_class = ImageSerializer
 
+class RecepieCreateApi(generics.CreateAPIView):
+    permission_classes = [permissions.AllowAny]
+    queryset = Recepie.objects.all()
+    serializer_class = RecepiesSerializer
+
 class ProductDetailApi(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     queryset = Product.objects.all()
