@@ -24,7 +24,7 @@ class Order(BaseModel):
     status = models.CharField(
         max_length=100,choices=STATUS_CHOICES, default='1'
     )
-    count = models.JSONField()
+    count = models.JSONField(null=True, blank=True)
     des = models.TextField()
 
     def __str__(self):

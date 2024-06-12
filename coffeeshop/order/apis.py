@@ -18,7 +18,7 @@ from ..users.serializers import SmallUserSerializer
 class CreateOrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order
-        fields = ('address', 'orders', 'status', 'des')
+        fields = ('address', 'orders', 'status', 'des', "count")
 
 
 class OrderSerializer(serializers.ModelSerializer):
