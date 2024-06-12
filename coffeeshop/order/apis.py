@@ -37,13 +37,15 @@ class OrderApi(APIView):
     def post(self, request):
         serializer = CreateOrderSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
+        user = BaseUser.objects.all()[0]
         try:
             user = create_order(
                 address=serializer.validated_data.get("address"),
                 orders=serializer.validated_data.get("orders"),
                 status=serializer.validated_data.get("status"),
                 des=serializer.validated_data.get("des"),
-                user=request.user
+                count=serializer.validated_data.get("count"),
+                user=user
             )
         except Exception as ex:
             return Response(
