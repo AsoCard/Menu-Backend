@@ -2,7 +2,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import OrderingFilter
 from drf_spectacular.utils import extend_schema
 from rest_framework import status, serializers
-from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from rest_framework.permissions import IsAuthenticated, IsAdminUser, AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.shortcuts import get_object_or_404
@@ -31,7 +31,7 @@ class OrderSerializer(serializers.ModelSerializer):
 
 
 class OrderApi(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
 
     @extend_schema(request=CreateOrderSerializer, responses=CreateOrderSerializer)
     def post(self, request):
