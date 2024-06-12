@@ -17,15 +17,18 @@ class ProductsSearchApi(generics.ListAPIView):
     serializer_class = ProductsSerializer
     search_fields = ['name', 'detail', 'category__name']
 
+
 class ProductCreateIMGApi(generics.CreateAPIView):
     permission_classes = [permissions.AllowAny]
     queryset = Image.objects.all()
     serializer_class = ImageSerializer
 
+
 class RecepieCreateApi(generics.CreateAPIView):
     permission_classes = [permissions.AllowAny]
     queryset = Recepie.objects.all()
     serializer_class = RecepiesSerializer
+
 
 class ProductDetailApi(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
@@ -33,10 +36,12 @@ class ProductDetailApi(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ProductsSerializer
     search_fields = ['name', 'detail', 'category__name']
 
+
 class ProductCreateApi(generics.CreateAPIView):
     permission_classes = [permissions.AllowAny]
     queryset = Product.objects.all()
     serializer_class = ProductCreateSerializer
+
 
 class RecepieDetailApi(APIView):
 
@@ -47,3 +52,10 @@ class RecepieDetailApi(APIView):
 
         serializer = RecepiesSerializer(recepies[0])
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class RecepieDetailActionApi(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    queryset = Product.objects.all()
+    serializer_class = ProductsSerializer
+    search_fields = ['name', 'detail', 'category__name']

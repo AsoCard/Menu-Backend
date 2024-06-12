@@ -7,5 +7,6 @@ urlpatterns = [
     path("img-add/", ProductCreateIMGApi.as_view(), name="product-add"),
     path('<int:pk>/', ProductDetailApi.as_view(), name='product-detail'),
     path('recepie/<int:pk>', RecepieDetailApi.as_view(), name='recepie-detail'),
-    path('recepie/add/', RecepieCreateApi.as_view(), name='recepie-add')
+    path('recepie/add/', RecepieCreateApi.as_view(), name='recepie-add'),
+    path('recepie/detail/<int:pk>', RecepieDetailActionApi.as_view(), name="recepi-updates")
 ]
